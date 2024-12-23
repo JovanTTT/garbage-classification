@@ -23,7 +23,9 @@ from train_model.train_model2.train_model2 import build_efficientnet, train_mode
 train_data, val_data, test_data, class_names = process_data("Data/train", "Data/val", "Data/test")
 
 #Define class weights (optional, based on dataset analysis)
+#Klase s manjim brojem uzoraka dobijaju vece tezine da bi bilo jednako
 class_weights = {0: 1.0, 1: 2.0, 2: 1.5, 3: 1.8, 4: 1.2}  # Adjust as needed
+
 
 model_type = 'efficientnet'  # Change to 'efficientnet' to use EfficientNet
 

@@ -83,6 +83,7 @@
 
 
 import tensorflow as tf
+import matplotlib.pyplot as plt 
 
 def process_data(data_train_path, data_test_path, data_val_path):
     img_width = 180
@@ -158,5 +159,23 @@ def process_data(data_train_path, data_test_path, data_val_path):
     for class_name, count in class_counts.items():
         print(f"{class_name}: {count}")
 
+     # Funkcija za prikazivanje uzoraka slika
+    def show_sample_images(data_train):
+        fig, axes = plt.subplots(1, len(class_names), figsize=(15, 15))
+
+        for i, class_name in enumerate(class_names):
+            # Dohvati slike iz trening skupa po klasama
+            class_images = [image for image, label in data_train.unbatch() if class_names[label.numpy()] == class_name]
+        
+            # Prikazivanje samo jedne slike iz te klase
+            ax = axes[i]
+            ax.imshow(class_images[0])  # Prikazivanje prve slike iz klase
+            ax.set_title(f"{class_name}")
+            ax.axis('off')  # Isključivanje prikaza osa
+
+       # plt.show()
+
+    # Pozivanje funkcije za prikazivanje uzoraka slika
+    show_sample_images(data_train)
 
     return data_train, data_val, data_test, class_names
