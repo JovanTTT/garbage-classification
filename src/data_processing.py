@@ -121,8 +121,53 @@ def process_data(data_train_path, data_test_path, data_val_path):
     data_test = data_test.map(lambda x, y: (x / 255.0, y))
 
 
-    print(f"Class names: {class_names}")
-    for class_name in class_names:
-        print(f"{class_name}: {sum([labels.numpy().tolist().count(class_name) for _, labels in data_train])}")
+    # print(f"Class names: {class_names}")
+    # for class_name in class_names:
+    #      print(f"{class_name}: {sum([labels.numpy().tolist().count(class_name) for _, labels in data_train])}")
+
+    # class_counts = [0] * len(class_names)
+    # for _, labels in data_train:
+    #     for label in labels.numpy():
+    #         class_counts[label] += 1
+
+    # for i, class_name in enumerate(class_names):
+    #     print(f"{class_name}: {class_counts[i]}")
+
+    def count_images_in_dataset(dataset):
+     count = 0
+     for images, labels in dataset:
+        count += images.shape[0]  # Broj slika u trenutnom batch-u
+     return count
+
+    # Ukupan broj slika u trening, validacionom i test skupu
+    print("-----------------------------------------------------------------")
+    train_images_count = count_images_in_dataset(data_train)
+    print(f"TRENING PODACI {train_images_count}")
+
+    val_images_count = count_images_in_dataset(data_val)
+    print(f"VALIDACIONI PODACI: {val_images_count}")
+
+    test_images_count = count_images_in_dataset(data_test)
+    print(f"TEST PODACI: {test_images_count}")
+
+
+   # Ispis imena klasa
+    print("-----------------------------------------------------------------")
+    print(f"NAZIVI KLASA: {class_names}")
+    
+    # Brojanje broja slika po klasama
+    class_counts = {class_name: 0 for class_name in class_names}  # Inicijalizacija brojača za svaku klasu
+    
+    # Iteracija kroz dataset da bi brojali slike po klasama, ZA TRENING PODATKE
+    for images, labels in data_train:
+        for label in labels.numpy():  # Pretvaranje tensor-a u numpy array
+            class_counts[class_names[label]] += 1
+    
+    # Ispis broja slika po klasama
+    print("-----------------------------------------------------------------")
+    print("BROJ SLIKA ZA TRENING PODATKE (PO KLASAMA)")
+    for class_name, count in class_counts.items():
+        print(f"{class_name}: {count}")
+
 
     return data_train, data_val, data_test, class_names
