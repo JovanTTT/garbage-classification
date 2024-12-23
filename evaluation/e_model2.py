@@ -13,7 +13,7 @@ def evaluate_model(model_path, test_data):
 # Example usage:
 if __name__ == "__main__":
     # Replace with the actual path to your model and test dataset
-    model_path = "models/EfficientNet.h5"
+    model_path = "models/efficientnet_nonscaled.h5"
     
     # Load your test data (ensure you have it preprocessed like your training data)
     img_height, img_width = 180, 180

@@ -33,7 +33,7 @@ model = build_efficientnet()
 trained_model, history = train_model(model, train_data, val_data, epochs=20, class_weights=class_weights)
 
 # Save the trained model
-trained_model.save(f"models/{model_type}.h5")
+trained_model.save(f"models/{model_type}_nonscaled.h5")
 print(f"Model saved to models/{model_type}.h5")
 
 # Evaluate the model on the test set
