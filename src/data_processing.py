@@ -128,33 +128,33 @@ def process_data(data_train_path, data_test_path, data_val_path):
     def count_images_in_dataset(dataset):
      count = 0
      for images, labels in dataset:
-        count += images.shape[0]  # Broj slika u trenutnom batch-u
+        count += images.shape[0]  # The number of images in the current batch
      return count
 
-    # Ukupan broj slika u trening, validacionom i test skupu
+    # Total number of images in training, validation and test set
     print("-----------------------------------------------------------------")
     train_images_count = count_images_in_dataset(data_train)
-    print(f"TRENING PODACI: {train_images_count}")
+    print(f"TRAINING DATA: {train_images_count}")
 
     val_images_count = count_images_in_dataset(data_val)
-    print(f"VALIDACIONI PODACI: {val_images_count}")
+    print(f"VALIDATION DATA: {val_images_count}")
 
     test_images_count = count_images_in_dataset(data_test)
-    print(f"TEST PODACI: {test_images_count}")
+    print(f"TEST DATA: {test_images_count}")
 
 
     print("-----------------------------------------------------------------")
-    print(f"NAZIVI KLASA: {class_names}")
+    print(f"CLASS NAMES: {class_names}")
     
-    class_counts = {class_name: 0 for class_name in class_names}  # Inicijalizacija brojača za svaku klasu
+    class_counts = {class_name: 0 for class_name in class_names}  # Initialization of counters for each class
     
-    # Iteracija kroz dataset da bi brojali slike po klasama, ZA TRENING PODATKE
+    # Iterating through the dataset to count images by class, FOR TRAINING DATA
     for images, labels in data_train:
-        for label in labels.numpy():  # Pretvaranje tensor-a u numpy array
+        for label in labels.numpy():  # Converting a tensor to a numpy array
             class_counts[class_names[label]] += 1
     
     print("-----------------------------------------------------------------")
-    print("BROJ SLIKA ZA TRENING PODATKE (PO KLASAMA)")
+    print("NUMBER OF IMAGES FOR TRAINING DATA (BY CLASSES)")
     for class_name, count in class_counts.items():
         print(f"{class_name}: {count}")
 
