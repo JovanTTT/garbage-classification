@@ -178,4 +178,42 @@ def process_data(data_train_path, data_test_path, data_val_path):
     # Pozivanje funkcije za prikazivanje uzoraka slika
     show_sample_images(data_train)
 
+    
+
     return data_train, data_val, data_test, class_names
+
+
+
+def show_sample_images_with_predictions(model, data_train, class_names):
+    """
+    Function to display sample images along with their true labels and model predictions.
+
+    Args:
+    model: Trained CNN model.
+    data_train: The training dataset.
+    class_names: List of class names corresponding to the dataset.
+    """
+    fig, axes = plt.subplots(1, len(class_names), figsize=(15, 15))
+
+    # Get a batch of images and labels
+    images, labels = next(iter(data_train))
+
+    for i, class_name in enumerate(class_names):
+        # Get the image for the current class
+        img = images[i].numpy()
+
+        # Get the real label for the image
+        true_label = class_names[labels[i].numpy()]
+
+        # Make a prediction for the image
+        img_expanded = tf.expand_dims(images[i], axis=0)  # Add batch dimension
+        prediction = model.predict(img_expanded)
+        predicted_label = class_names[tf.argmax(prediction, axis=1).numpy()[0]]
+
+        # Plot the image and its true and predicted label
+        ax = axes[i]
+        ax.imshow(img)
+        ax.set_title(f"True: {true_label}\nPred: {predicted_label}")
+        ax.axis('off')
+
+    plt.show()

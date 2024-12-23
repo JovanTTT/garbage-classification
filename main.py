@@ -17,6 +17,7 @@
 #     print(f"{model_name} saved to models/{model_name}.h5")
 
 from src.data_processing import process_data
+from src.data_processing import show_sample_images_with_predictions
 from train_model.train_model2.train_model2 import build_efficientnet, train_model
 from train_model.train_model1 import build_cnn, train_cnn_model
 
@@ -58,3 +59,6 @@ print(f"Model saved to models/{model_type}.h5")
 # Evaluate the model on the test set
 test_loss, test_accuracy = trained_model.evaluate(test_data)
 print(f"Test accuracy: {test_accuracy}")
+
+
+show_sample_images_with_predictions(model, train_data, class_names)

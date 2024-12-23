@@ -19,8 +19,9 @@ def build_cnn(input_shape=IMG_SHAPE, num_classes=NUM_CLASSES):
         # Third Convolutional Block
         layers.Conv2D(128, (3, 3), activation='relu'),
         layers.MaxPooling2D((2, 2)),
+
         
-        # Flatten the results and feed into a fully connected layer
+        # Flatten i potpuno povezani slojevi
         layers.Flatten(),
         layers.Dropout(0.5),
         layers.Dense(128, activation='relu'),
