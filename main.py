@@ -53,8 +53,8 @@ model = build_cnn()
 trained_model, history = train_cnn_model(model, train_data, val_data, epochs=20, class_weights=class_weights)
 
 # Save the trained model
-trained_model.save(f"models/{model_type}.h5")
-print(f"Model saved to models/{model_type}.h5")
+#trained_model.save(f"models/{model_type}.h5")
+#print(f"Model saved to models/{model_type}.h5")
 
 # Evaluate the model on the test set
 test_loss, test_accuracy = trained_model.evaluate(test_data)
