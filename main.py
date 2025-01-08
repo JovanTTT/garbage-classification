@@ -20,6 +20,11 @@ from src.data_processing import process_data
 from src.data_processing import show_sample_images_with_predictions
 from train_model.train_model2.train_model2 import build_efficientnet, train_model
 from train_model.train_model1 import build_cnn, train_cnn_model
+from src.video_processing import detect_object_on_table
+import cv2
+import tensorflow as tf
+import numpy as np
+import matplotlib.pyplot as plt
 
 # Preprocess data
 train_data, val_data, test_data, class_names = process_data("Data/train", "Data/val", "Data/test")
@@ -62,3 +67,44 @@ print(f"Test accuracy: {test_accuracy}")
 
 
 show_sample_images_with_predictions(model, train_data, class_names)
+
+
+
+def preprocess_frame(frame, img_size=(180, 180)):
+    frame_resized = cv2.resize(frame, img_size)  # Promeni dimenzije slike
+    frame_resized = np.expand_dims(frame_resized, axis=0)  # Dodaj dimenziju za batch
+    frame_resized = frame_resized / 255.0  # Normalizuj slike (ako je potrebno)
+    return frame_resized
+
+# Pozivanje funkcije za detekciju objekta i klasifikaciju
+def classify_detected_frames(model, video_path, selected_frames, img_size=(180, 180)):
+    video_frames_with_object = detect_object_on_table(video_path, start_time=4.0, selected_frames=selected_frames)
+    
+    if len(video_frames_with_object) > 0:
+        print(f"Found {len(video_frames_with_object)} frames with objects for classification.")
+        for i, frame in enumerate(video_frames_with_object):
+            preprocessed_frame = preprocess_frame(frame, img_size)
+            # Klasifikacija frejma
+            predictions = model.predict(preprocessed_frame)
+            predicted_class = np.argmax(predictions)  # Predikcija klase
+            predicted_class_name = class_names[predicted_class] 
+            print(f"Frame {i+1} predicted as class: {predicted_class_name}")
+            
+            # Prikazivanje rezultata
+            plt.imshow(frame)
+            plt.axis('off')
+            plt.title(f"Frame {i+1}, Predicted class: {predicted_class_name}")
+            plt.show()
+            
+            # Pauza između frejmova (ako je potrebno)
+            cv2.waitKey(1000)  # Pauza u milisekundama (1000 ms = 1 sekunda)
+    else:
+        print("No frames with objects found.")
+
+# Primer upotrebe
+selected_frames = [5.0, 12.0, 20.0, 29.0, 37.0]  # Vremenske tačke koje želiš da koristiš
+video_path = 'Data/video/classification_video.mp4'
+
+# Pozivanje funkcije za klasifikaciju detektovanih frejmova
+classify_detected_frames(trained_model, video_path, selected_frames)
+
