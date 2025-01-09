@@ -37,7 +37,7 @@ def build_cnn(input_shape=IMG_SHAPE, num_classes=NUM_CLASSES):
     return model
 
 
-def train_cnn_model(model, train_data, val_data, epochs=20, class_weights=None):
+def train_cnn_model(model, train_data, val_data, epochs=15, class_weights=None):
     """Trains the CNN model and returns the trained model and history."""
     early_stopping = EarlyStopping(monitor='val_loss', patience=3, restore_best_weights=True)
     
