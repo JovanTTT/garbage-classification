@@ -71,6 +71,7 @@ def detect_object_on_table(video_path, img_size=(180, 180), start_time=3.0, sele
             if cv2.contourArea(contour) > 500:  # Podesi minimalnu veličinu promena
                 # Kada je promena dovoljno velika, to znači da je predmet verovatno postavljen
                 frame_resized = cv2.resize(frame, img_size)
+                frame_resized = cv2.cvtColor(frame_resized, cv2.COLOR_BGR2RGB)  # Konvertuj u RGB
                 frames_with_object.append(frame_resized)
                 break  # Uzimamo samo prvi frejm gde je promena detektovana
 
@@ -82,23 +83,23 @@ def detect_object_on_table(video_path, img_size=(180, 180), start_time=3.0, sele
 
 # Primer upotrebe
 # Definiši koje vremenske tačke želiš da koristiš (u sekundama)
-selected_frames = [05.0,12.0, 20.0, 29.0, 37.0]  # Na primer, samo frejmovi u 5s, 10s, i 15s
+# selected_frames = [05.0,12.0, 20.0, 29.0, 37.0]  # Na primer, samo frejmovi u 5s, 10s, i 15s
 
-video_frames_with_object = detect_object_on_table('Data/video/classification_video.mp4', start_time=4.0, selected_frames=selected_frames)
+# video_frames_with_object = detect_object_on_table('Data/video/classification_video.mp4', start_time=4.0, selected_frames=selected_frames)
 
-def display_all_selected_frames(frames):
-    for i, frame in enumerate(frames):
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
-        plt.imshow(frame)
-        plt.axis('off')
-        plt.title(f"Frame {i+1}")
-        plt.show()  # Prikazivanje frejmova
+# def display_all_selected_frames(frames):
+#     for i, frame in enumerate(frames):
+#         frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+#         plt.imshow(frame)
+#         plt.axis('off')
+#         plt.title(f"Frame {i+1}")
+#         plt.show()  # Prikazivanje frejmova
         
-        # Pauza između frejmova (na primer 1 sekunda)
-        cv2.waitKey(1000)  # Pauza u milisekundama (1000 ms = 1 sekunda)
+#         # Pauza između frejmova (na primer 1 sekunda)
+#         cv2.waitKey(1000)  # Pauza u milisekundama (1000 ms = 1 sekunda)
 
-# Pretpostavimo da je 'video_frames_with_object' lista frejmova koje si izabrala
-if len(video_frames_with_object) > 0:
-    display_all_selected_frames(video_frames_with_object)
-else:
-    print("No frames with objects found.")
+# # Pretpostavimo da je 'video_frames_with_object' lista frejmova koje si izabrala
+# if len(video_frames_with_object) > 0:
+#     display_all_selected_frames(video_frames_with_object)
+# else:
+#     print("No frames with objects found.")
