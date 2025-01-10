@@ -1,5 +1,6 @@
 import tensorflow as tf
 import numpy as np
+import matplotlib.pyplot as plt
 from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import load_img, img_to_array
 
@@ -19,20 +20,23 @@ def predict_image(image_path, model_path, class_names):
     predicted_class = class_names[predicted_class_index]
     confidence_score = predictions[0][predicted_class_index]  # Get the confidence score of the predicted class
 
-    return predicted_class, confidence_score
+    return predicted_class, confidence_score, img
 
 # Example usage:
 if __name__ == "__main__":
     # Replace with the path to your image, model, and class names
-    image_path = "Data/test_pictures/cardboard388.jpg"
-    model_path = "models/EfficientNet.h5"
+    image_path = "Data/test_pictures/karton.jpg"
+    model_path = "models/efficientnet_nonscaled.h5"
     class_names = ['cardboard', 'glass', 'metal', 'paper', 'plastic']  # Replace with your class names
 
-    predicted_class, confidence_score = predict_image(image_path, model_path, class_names)
+    predicted_class, confidence_score, img = predict_image(image_path, model_path, class_names)
+
+    # Display the image with the predicted class and confidence score
+    plt.imshow(img)
+    plt.title(f"Predicted: {predicted_class} ({confidence_score*100:.2f}%)")
+    plt.axis('off')  # Turn off axis labels
+    plt.show()
+
+    # Print prediction details
     print(f"The predicted class for the image is: {predicted_class}")
-    print(f"Confidence score: {confidence_score:.2f}")
-
-
-
-
-
+    print(f"Confidence score: {confidence_score*100:.2f}%")
