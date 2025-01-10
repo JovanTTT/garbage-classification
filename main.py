@@ -91,6 +91,7 @@ def create_annotated_video(video_path, model, class_names, selected_frames, outp
     print(f"Annotated video saved to {output_path}")
 
 
+
 # Preprocess data
 train_data, val_data, test_data, class_names = process_data("Data/train", "Data/val", "Data/test")
 
