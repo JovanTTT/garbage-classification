@@ -9,7 +9,7 @@ from tensorflow.keras import layers
 # data_val_path = 'Data/val'
 
 
-def process_data(data_train_path, data_test_path, data_val_path):
+def process_data_first(data_train_path, data_test_path, data_val_path):
     img_width = 180
     img_height = 180
 
