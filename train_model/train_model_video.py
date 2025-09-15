@@ -7,10 +7,10 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from src.video_processing import detect_object_on_table
 
 def preprocess_frame(frame, img_size=(180, 180)):
-    frame_resized = cv2.resize(frame, img_size)  # Resize the image
-    frame_resized = np.expand_dims(frame_resized, axis=0)  # Add batch dimension
-    frame_resized = frame_resized / 255.0  # Normalize the image
-    return frame_resized
+    frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)  # Convert to RGB
+    frame_resized = cv2.resize(frame, img_size)  # Resize to model input size
+    frame_normalized = frame_resized / 255.0  # Normalize pixel values
+    return np.expand_dims(frame_normalized, axis=0)  # Add batch dimension
 
 def classify_detected_frames(model, video_path, selected_frames, class_names, img_size=(180, 180)):
     video_frames_with_object = detect_object_on_table(video_path, start_time=4.0, selected_frames=selected_frames)
