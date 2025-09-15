@@ -25,8 +25,10 @@ def predict_image(image_path, model_path, class_names):
 # Example usage:
 if __name__ == "__main__":
     # Replace with the path to your image, model, and class names
-    image_path = "Data/test_pictures/karton.jpg"
-    model_path = "models/efficientnet_nonscaled.h5"
+    image_path = "Data/test_pictures/metal.png"
+    #model_path = "models/efficientnet_nonscaled.h5"
+    #model_path = "models/cnn.h5"
+    model_path = "models/cct_1.h5"
     class_names = ['cardboard', 'glass', 'metal', 'paper', 'plastic']  # Replace with your class names
 
     predicted_class, confidence_score, img = predict_image(image_path, model_path, class_names)
