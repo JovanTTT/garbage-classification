@@ -120,7 +120,7 @@ model_type = 'cnn'
 model = build_cnn()
 
 # Train the model
-trained_model, history = train_cnn_model(model, train_data, val_data, epochs=15, class_weights=class_weights)
+trained_model, history = train_cnn_model(model, train_data, val_data, epochs=5, class_weights=class_weights)
 
 # Save the trained model
 trained_model.save(f"models/{model_type}_nonscaled.h5")
