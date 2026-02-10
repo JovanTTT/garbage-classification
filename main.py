@@ -80,7 +80,7 @@ video_path = 'Data/video/classification_video.mp4'
 # classification with images
 classify_detected_frames(trained_model, video_path, selected_frames, class_names)
 
-# clasification with new video
+# clasification with new video  
 output_path = 'Data/video/annotated_classification_video.mp4'
 create_annotated_video(video_path, trained_model, class_names, selected_frames, output_path)
 
