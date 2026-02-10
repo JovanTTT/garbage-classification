@@ -67,7 +67,7 @@ print(f"Model saved to models/{model_type}_1.h5")
 #
 # # Evaluate the model on the test set
 # test_loss, test_accuracy = trained_model.evaluate(test_data)
-# print(f"Test accuracy: {test_accuracy}")
+# print(f"Test accuracy: {test_accuracy}") 
 #
 #
 show_sample_images_with_predictions(trained_model, train_data, class_names)
