@@ -73,7 +73,7 @@ print(f"Model saved to models/{model_type}_1.h5")
 show_sample_images_with_predictions(trained_model, train_data, class_names)
 #
 # Video classification
-selected_frames = [5.0, 12.0, 20.0, 29.0, 37.0]  # The time points you want to use
+selected_frames = [5.0, 12.0, 20.0, 29.0, 37.0]  #  The time points you want to use
 
 video_path = 'Data/video/classification_video.mp4'
 
