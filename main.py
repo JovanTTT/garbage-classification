@@ -55,7 +55,7 @@ print(f"Model saved to models/{model_type}.h5")
 #trained_model, history = train_cct(model, train_data, val_data, epochs=35)
 
 # Save the trained model
-#trained_model.save(f"models/{model_type}_1.h5")
+# trained_model.save(f"models/{model_type}_1.h5")
 print(f"Model saved to models/{model_type}_1.h5")
 
 
