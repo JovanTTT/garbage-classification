@@ -11,8 +11,8 @@ from train_model.train_model_video import classify_detected_frames, create_annot
 # Preprocess data
 train_data, val_data, test_data, class_names = process_data("Data/train", "Data/val", "Data/test")
 
-#Define class weights (optional, based on dataset analysis)
-#Klase s manjim brojem uzoraka dobijaju vece tezine da bi bilo jednako
+# Define class weights (optional, based on dataset analysis)
+# Klase s manjim brojem uzoraka dobijaju vece tezine da bi bilo jednako
 class_weights = {0: 1.0, 1: 2.0, 2: 1.5, 3: 1.8, 4: 1.2}
 
 
